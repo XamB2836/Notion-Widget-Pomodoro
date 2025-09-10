@@ -12,39 +12,43 @@
       margin: 0; 
       height: 100vh; 
       display: flex; 
-      flex-direction: column; 
       justify-content: center; 
       align-items: center; 
     }
 
+    .container {
+      max-width: 300px;   /* largeur maximale */
+      margin: auto;
+      padding: 20px;
+    }
+
     h1 { 
-      font-size: 28px; 
-      margin-bottom: 20px; 
+      font-size: 20px; 
+      margin-bottom: 15px; 
       color: #f2f2f2;
     }
 
     #status { 
-      font-size: 20px; 
-      margin-bottom: 15px; 
-      letter-spacing: 1px;
+      font-size: 16px; 
+      margin-bottom: 10px; 
       color: #bbb; 
     }
 
     #timer { 
-      font-size: 80px; 
-      margin: 20px 0; 
+      font-size: 45px; 
+      margin: 15px 0; 
       font-weight: bold; 
       color: #fff;
     }
 
-    .btn-container { margin-top: 15px; }
+    .btn-container { margin-top: 10px; }
 
     button { 
-      font-size: 18px; 
-      margin: 8px; 
-      padding: 10px 22px; 
+      font-size: 14px; 
+      margin: 5px; 
+      padding: 6px 14px; 
       border: none; 
-      border-radius: 10px; 
+      border-radius: 8px; 
       cursor: pointer; 
       background: #3c4043; 
       color: #f1f1f1; 
@@ -53,33 +57,34 @@
 
     button:hover { background: #5c6368; transform: translateY(-2px); }
 
-    /* Mode buttons style */
-    .mode-btn { background: #3c4043; }
+    /* Boutons de mode (colorés quand actif) */
     .mode-btn.active.focus { background: #ff6b6b; }
     .mode-btn.active.short { background: #4cd964; }
     .mode-btn.active.long { background: #5ac8fa; }
 
-    /* Control buttons style */
+    /* Boutons de contrôle */
     .control-btn { background: #444; }
     .control-btn:hover { background: #666; }
   </style>
 </head>
 <body>
-  <h1>Pomodoro Timer</h1>
+  <div class="container">
+    <h1>Pomodoro Timer</h1>
 
-  <div class="btn-container">
-    <button class="mode-btn focus" onclick="setMode('focus')">Focus</button>
-    <button class="mode-btn short" onclick="setMode('short')">Short Break</button>
-    <button class="mode-btn long" onclick="setMode('long')">Long Break</button>
-  </div>
+    <div class="btn-container">
+      <button class="mode-btn focus" onclick="setMode('focus')">Focus</button>
+      <button class="mode-btn short" onclick="setMode('short')">Short</button>
+      <button class="mode-btn long" onclick="setMode('long')">Long</button>
+    </div>
 
-  <div id="status">Focus</div>
-  <div id="timer">25:00</div>
+    <div id="status">Focus</div>
+    <div id="timer">25:00</div>
 
-  <div class="btn-container">
-    <button class="control-btn" onclick="start()">Start</button>
-    <button class="control-btn" onclick="pause()">Pause</button>
-    <button class="control-btn" onclick="reset()">Reset</button>
+    <div class="btn-container">
+      <button class="control-btn" onclick="start()">Start</button>
+      <button class="control-btn" onclick="pause()">Pause</button>
+      <button class="control-btn" onclick="reset()">Reset</button>
+    </div>
   </div>
 
   <script>
@@ -87,7 +92,7 @@
     const focusTime = 25 * 60, shortBreak = 5 * 60, longBreak = 15 * 60;
 
     function setMode(newMode) {
-      clearInterval(timer); timer = null; // reset timer when switching mode
+      clearInterval(timer); timer = null;
       mode = newMode;
       if (mode === "focus") timeLeft = focusTime;
       if (mode === "short") timeLeft = shortBreak;
@@ -125,10 +130,9 @@
 
     function reset() {
       clearInterval(timer); timer = null;
-      setMode(mode); // reset to current mode default time
+      setMode(mode);
     }
 
-    // Init
     setMode("focus");
   </script>
 </body>
